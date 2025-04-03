@@ -1,0 +1,125 @@
+const apiUrl = "/api/orders/";
+const loginUrl = "/api-token-auth/";
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    const isSecure = window.location.protocol === 'https:';
+    const secureFlag = isSecure ? ";Secure" : "";
+    document.cookie = name + "=" + value + ";" + expires + ";path=/" + secureFlag;
+}
+
+// Chỉ chạy loadOrders nếu đang ở trang index
+if (window.location.pathname === '/app/orders/' && getCookie('auth_token')) {
+    loadOrders();
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+$("#login-btn").click(function () {
+    const username = $("#username").val();
+    const password = $("#password").val();
+    $.ajax({
+        url: loginUrl,
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        data: JSON.stringify({ username: username, password: password }),
+        success: function (response) {
+            setCookie('auth_token', response.token, 180);
+            window.location.href = "/app/";  // Chuyển hướng về index sau khi đăng nhập
+        },
+        error: function (xhr) {
+            alert("Login failed: " + xhr.responseText);
+        }
+    });
+});
+
+function loadOrders() {
+    const token = getCookie('auth_token');
+    $.ajax({
+        url: apiUrl,
+        method: "GET",
+        headers: { "Authorization": "Token " + token },
+        success: function (data) {
+            let html = "";
+            data.forEach(order => {
+                html += `
+                    <tr>
+                        <td>${formatDate(order.order_datetime)}</td>
+                        <td><input type="text" value="${order.order_fullname}" data-id="${order.id}" data-field="order_fullname" class="form-control editable"></td>
+                        <td>${order.order_phone}</td>
+                        <td><input type="text" value="${order.order_address}" data-id="${order.id}" data-field="order_address" class="form-control editable"></td>
+                        <td>${order.order_qty_amt}</td>
+                        <td><input type="text" value="${order.order_note || ''}" data-id="${order.id}" data-field="order_note" class="form-control editable"></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton-${order.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ${order.order_confirmation || 'Blank'}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-${order.id}">
+                                    <a class="dropdown-item confirmation-option" href="#" data-id="${order.id}" data-value="">Blank</a>
+                                    <a class="dropdown-item confirmation-option" href="#" data-id="${order.id}" data-value="OK">OK</a>
+                                    <a class="dropdown-item confirmation-option" href="#" data-id="${order.id}" data-value="NG">NG</a>
+                                    <a class="dropdown-item confirmation-option" href="#" data-id="${order.id}" data-value="KNM">KNM</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>`;
+            });
+            $("#order-list").html(html);
+        },
+        error: function (xhr) {
+            alert("Error loading orders: " + xhr.responseText);
+        }
+    });
+}
+
+function updateOrder(id, field, value) {
+    const token = getCookie('auth_token');
+    let data = {};
+    data[field] = value;
+    $.ajax({
+        url: apiUrl + id + "/",
+        method: "PATCH",
+        headers: {
+            "Authorization": "Token " + token,
+            "Content-Type": "application/json"
+        },
+        data: JSON.stringify(data),
+        success: function (response) {
+            console.log(`Updated ${field} successfully!`);
+        },
+        error: function (xhr) {
+            console.error("Error updating:", xhr.responseText);
+        }
+    });
+}
+
+$(document).on('change', '.editable', function () {
+    const id = $(this).data('id');
+    const field = $(this).data('field');
+    const value = $(this).val();
+    updateOrder(id, field, value);
+});

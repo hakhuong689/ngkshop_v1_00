@@ -1,0 +1,118 @@
+{% extends 'pages/base.html' %}
+{% block title %}Danh mục sản phẩm{% endblock %}
+
+{% load static %}
+{% block stylesheet %}
+<link href="{% static 'css/custom_modal.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block cardheader %}
+<h6 class="m-0 font-weight-bold text-primary">Danh sách nhóm sản phẩm</h6>
+{% endblock %}
+
+{% block content %}
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <button class="btn btn-primary mb-3" onclick="showAddProductGroupForm()">Thêm nhóm sản phẩm</button>
+
+            <table class="table table-bordered table-sm table-hover customtblhead" id="productsTable" width="100%"
+                cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Mã nhóm SP</th>
+                        <th>Tên nhóm SP</th>
+                        <th>Ghi chú</th>
+                        <th>Tạo đơn COD</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="productgroups-list"></tbody>
+            </table>
+        </div>
+        <!-- Phân trang -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="d-flex align-items-center">
+                <select id="items-per-page" class="form-control form-control-sm mr-2" style="width: auto;">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                </select>
+                <span id="pagination-info" class="text-muted small"></span>
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-end mb-0" id="pagination">
+                    <!-- Phân trang sẽ được tạo động bằng JavaScript -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="product-form-container" tabindex="-1" role="dialog" aria-labelledby="form-title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="form-title">Thêm nhóm sản phẩm mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="hideAddProductGroupForm()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form">
+                    <input type="hidden" id="productgroup-id">
+
+                    <!-- Row 1: Label và Input cho Group Code, bên phải là Checkbox -->
+                    <div class="form-group row align-items-center">
+                        <!-- Label cho Group Code -->
+                        <label for="group_code" class="col-sm-3 col-form-label">Mã nhóm SP:</label>
+
+                        <!-- Input cho Group Code -->
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="group_code" name="group_code" required>
+                        </div>
+
+                        <!-- Checkbox: đặt vào cột bên phải -->
+                        <div class="col-sm-4 d-flex align-items-center justify-content-end">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="is_making_sale"
+                                    name="is_making_sale">
+                                <label class="form-check-label" for="is_making_sale">Hàng tạo đơn COD</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Group Name -->
+                    <div class="form-group row align-items-center">
+                        <label for="group_name" class="col-sm-3 col-form-label">Tên nhóm SP:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="group_name" name="group_name" required>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Note -->
+                    <div class="form-group row align-items-center">
+                        <label for="note" class="col-sm-3 col-form-label">Ghi chú:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="note" name="note">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAddProductGroupForm()">Hủy</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/master_productgroup.js' %}"></script>
+{% endblock %}

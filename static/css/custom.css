@@ -1,0 +1,217 @@
+/* START========DROPDOWN order_onfirmation */
+.dropdown-item.bg-gradient-success {
+    background: linear-gradient(45deg, #1cc88a, #36d1a1);
+    color: white;
+}
+
+.dropdown-item.bg-gradient-danger {
+    background: linear-gradient(45deg, #e74a3b, #f16c5d);
+    color: white;
+}
+
+.dropdown-item.bg-gradient-warning {
+    background: linear-gradient(45deg, #f6c23e, #f8d56a);
+    color: black;
+}
+
+.dropdown-item.bg-white {
+    background: white;
+    color: black;
+}
+
+.dropdown-item.bg-gradient-success:hover,
+.dropdown-item.bg-gradient-danger:hover,
+.dropdown-item.bg-gradient-warning:hover {
+    filter: brightness(90%);
+    /* Hiệu ứng hover */
+    color: inherit;
+}
+
+/* END========DROPDOWN order_onfirmation */
+
+.mb-4_custom {
+    margin-bottom: 0.1rem !important
+}
+
+.container-fluid_custom {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
+
+.customtblhead thead th {
+    text-align: center;
+    /* Căn giữa ngang */
+    vertical-align: middle;
+    /* Căn giữa dọc */
+    position: relative;
+}
+
+.customtblhead tr td {
+    vertical-align: middle;
+    font-size: 0.85rem;
+}
+
+/* Custom Select button */
+.custom-select-btn {
+    /* Kiểu dáng giống nút btn-primary của Bootstrap */
+    background-color: #4e73df;
+    /* Màu xanh của .btn-primary */
+    color: white;
+    border: 1px solid #4e73df;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    appearance: none;
+    /* Xóa mũi tên mặc định của select */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    /* Mũi tên trắng */
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+/* Hover giống .btn-primary */
+.custom-select-btn:hover {
+    background-color: #2e59d9;
+    border-color: #2e59d9;
+    color: red;
+}
+
+/* Focus giống Bootstrap */
+.custom-select-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+/* Đảm bảo option trong select hiển thị bình thường */
+.custom-select-btn option {
+    background-color: white;
+    color: black;
+}
+
+td .bi-pencil-square {
+    color: #007bff !important;
+    /* Màu xanh cho Sửa */
+}
+
+td .bi-trash3-fill {
+    color: #dc3545 !important;
+    /* Màu đỏ cho Xóa */
+}
+
+/* Giới hạn chiều cao tối đa 3 dòng và tự động xuống dòng */
+.customtblhead textarea.editable {
+    resize: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    width: 100%;
+    font-size: 0.85rem;
+}
+
+/* Style cho thanh kéo */
+.resize-handle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: transparent;
+    cursor: col-resize;
+    user-select: none;
+}
+
+.resize-handle:hover {
+    background: #007bff;
+}
+
+
+/* QUY ĐỊNH MÀU CHO CÁC ROW CỦA ORDERS */
+/* Màu của chữ "Draft form"*/
+.order-status {
+    font-weight: bold;
+    color: #e74a3b;
+    /* Màu đỏ để nổi bật */
+    margin-bottom: 5px;
+}
+
+/* Đảm bảo textarea và select không ghi đè màu nền của tr */
+#ordersTable .editable,
+#ordersTable .form-control,
+#ordersTable .custom-select-btn {
+    background-color: transparent !important;
+    /* Hoặc background-color: inherit */
+    border: 1px solid #ced4da !important;
+    /* Giữ viền để dễ nhìn */
+}
+
+/* Đảm bảo màu chữ đen trên các nền màu */
+#ordersTable tr.bg-gray-200,
+#ordersTable tr.bg-warning,
+#ordersTable tr.bg-danger {
+    color: #000 !important;
+}
+
+#ordersTable tr.bg-gray-200 td,
+#ordersTable tr.bg-warning td,
+#ordersTable tr.bg-danger td {
+    color: #000 !important;
+}
+
+/* Màu nền cho Draf form */
+.bg-gray-200 {
+    background-color: #e9ecef !important;
+    /* Xám nhạt */
+}
+
+/* Màu nền cho đơn KNM */
+.bg-warning.bg-opacity-25 {
+    background-color: rgba(255, 193, 7, 0.2) !important;
+    /* Vàng nhạt */
+}
+
+/* Màu nền cho đơn NG */
+.bg-danger.bg-opacity-25 {
+    background-color: rgba(220, 53, 69, 0.2) !important;
+    /* Đỏ nhạt */
+}
+
+/* END==============Định dạng dòng order_status trang Orders*/
+
+
+.sort-icon.fa-sort-up,
+.sort-icon.fa-sort-down {
+    color: #007bff;
+    /* Màu xanh khi đang sắp xếp */
+}
+
+/* START=========MENU LỌC CONFIRMATION
+/* Đặt th có data-field="order_confirmation" làm container định vị */
+th[data-field="order_confirmation"] {
+    position: relative;
+}
+
+/* Định vị dropdown-menu để lề phải khớp với th */
+th[data-field="order_confirmation"] .dropdown-menu {
+    position: fixed;
+    /* Cố định vị trí menu trên màn hình */
+    z-index: 1050;
+    /* Đảm bảo menu luôn ở trên cùng */
+    max-height: 300px;
+    /* Giới hạn chiều cao menu */
+    overflow-y: auto;
+    /* Cho phép cuộn nếu nội dung vượt quá chiều cao */
+    width: 150px;
+    /* Đặt độ rộng cố định cho menu */
+    background-color: #fff;
+    /* Màu nền menu */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Thêm bóng để phân biệt menu */
+    border: 1px solid #ddd;
+    /* Đường viền menu */
+}
+
+/* END=========MENU LỌC CONFIRMATION

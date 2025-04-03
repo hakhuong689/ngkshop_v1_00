@@ -1,0 +1,128 @@
+{% extends 'pages/base.html' %}
+{% block title %}Danh sách đơn hàng{% endblock %}
+{% load static %}
+
+{% block cardheader %}
+<h6 class="m-0 font-weight-bold text-primary">Danh sách đơn hàng</h6>
+
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+    onsubmit="filterOrders(); return false;">
+    <div class="input-group">
+        <input type="text" id="search_input" class="form-control bg-light border-0 small"
+            placeholder="Tìm kiếm theo tên, số điện thoại, địa chỉ..." aria-label="Search"
+            aria-describedby="basic-addon2" name="search" value="{{ request.GET.search }}">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Date Range Filter -->
+<div class="d-none d-sm-inline-block form-inline ms-2 my-1">
+    <form onsubmit="filterOrders(); return false;" class="form-inline">
+        <input type="date" style="margin-right: 10px;" class="form-control form-control-sm me-1" id="start_date"
+            name="start_date" value="{{ request.GET.start_date }}">
+        <input type="date" style="margin-right: 10px;" class="form-control form-control-sm me-1" id="end_date"
+            name="end_date" value="{{ request.GET.end_date }}">
+        <button type="button" style="margin-right: 10px;" class="btn btn-primary btn-sm me-1"
+            onclick="filterOrders()">Lọc</button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetFilters()">Xóa</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm table-hover customtblhead" id="ordersTable" width="100%"
+                cellspacing="0">
+                <thead>
+                    <tr style="font-size: .8rem;">
+                        <th style="width: 5%" class="sortable" data-field="order_datetime">Ngày Order<i
+                                class="fas fa-sort sort-icon" aria-hidden="true"></i></th>
+                        <th style="width: 5%" class="sortable" data-field="cod_datetime">Ngày tạo COD<i
+                                class="fas fa-sort sort-icon" aria-hidden="true"></i></th>
+                        <th style="width: 5%" class="sortable" data-field="cod_order">Mã vận đơn<i
+                                class="fas fa-sort sort-icon" aria-hidden="true"></i></th>
+                        <th style="width: 4%" data-field="order_phone">Điện thoại</th>
+                        <th style="width: 4%" data-field="order_phone">Tổng phí</th>
+                        <th style="width: 4%" data-field="order_phone">Tiền COD</th>
+                        <th style="width: 4%" data-field="order_phone">Tên sản phẩm</th>
+                        <th style="width: 15%" data-field="order_qty_amt">Số lượng</th>
+                        <th style="width: 4%" data-field="order_phone">Hộp carton</th>
+                        <th style="width: 15%" data-field="order_qty_amt">Số lượng</th>
+                        <th style="width: 15%" data-field="order_note">Ghi chú
+                        <th style="width: 5%" data-field="order_confirmation">Xác nhận</th>
+                    </tr>
+                    <tr>
+                        <th><input type="text" class="form-control form-control-sm column-filter"
+                                data-field="order_datetime" placeholder="Tìm ngày"></th>
+                        <th><input type="text" class="form-control form-control-sm column-filter"
+                                data-field="order_fullname" placeholder="Tìm tên"></th>
+                        <th><input type="text" class="form-control form-control-sm column-filter"
+                                data-field="order_phone" placeholder="Tìm số"></th>
+                        <th><input type="text" class="form-control form-control-sm column-filter"
+                                data-field="order_address" placeholder="Tìm địa chỉ"></th>
+                        <th><input type="text" class="form-control form-control-sm column-filter"
+                                data-field="order_qty_amt" placeholder="Tìm số lượng"></th>
+                        <th><input type="text" class="form-control form-control-sm column-filter"
+                                data-field="order_note" placeholder="Tìm ghi chú"></th>
+                        <th data-field="order_confirmation">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button"
+                                    id="confirmationDropdown" data-toggle="dropdown">Lọc
+                                </button>
+                                <div class="dropdown-menu p-3" id="confirmationMenu">
+                                    <div>
+                                        <label><input type="checkbox" class="confirmation-filter" value="" checked>
+                                            Blank</label>
+                                    </div>
+                                    <div>
+                                        <label><input type="checkbox" class="confirmation-filter" value="KNM" checked>
+                                            KNM</label>
+                                    </div>
+                                    <div>
+                                        <label><input type="checkbox" class="confirmation-filter" value="OK"> OK</label>
+                                    </div>
+                                    <div>
+                                        <label><input type="checkbox" class="confirmation-filter" value="NG"> NG</label>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-sm mt-2"
+                                        id="applyConfirmationFilter">Áp dụng</button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="order-list">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Phân trang -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="d-flex align-items-center">
+                <select id="items-per-page" class="form-control form-control-sm mr-2" style="width: auto;">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                </select>
+                <span id="pagination-info" class="text-muted small"></span>
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-end mb-0" id="pagination">
+                    <!-- Phân trang sẽ được tạo động bằng JavaScript -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/cod_orders.js' %}"></script>
+{% endblock %}

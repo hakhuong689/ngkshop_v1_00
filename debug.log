@@ -1,0 +1,420 @@
+INFO 2025-04-01 16:38:27,191 autoreload Watching for file changes with StatReloader
+INFO 2025-04-01 16:38:32,407 autoreload Watching for file changes with StatReloader
+INFO 2025-04-01 16:41:17,101 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-01 16:41:17,664 autoreload Watching for file changes with StatReloader
+DEBUG 2025-04-01 16:41:27,380 views Request data: {'order_id': '987fcdeb-1234-5678-9012-426614174000', 'product_code': 'GELTRANGRANG', 'price_number': 1}
+DEBUG 2025-04-01 16:41:47,507 views Request data: {'order_id': '987fcdeb-1234-5678-9012-426614174000', 'product_code': 'GELTRANGRANG', 'price_number': 2}
+DEBUG 2025-04-01 16:41:51,818 views Request data: {'order_id': '987fcdeb-1234-5678-9012-426614174000', 'product_code': 'GELTRANGRANG', 'price_number': 3}
+INFO 2025-04-01 16:42:35,042 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-01 16:42:35,577 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-01 16:45:24,533 log Bad Request: /api/cod-orders/
+WARNING 2025-04-01 17:00:59,985 log Not Found: /favicon.ico
+WARNING 2025-04-01 17:02:53,152 log Not Found: /api/cod-orders/8201ac906fe245d9a6053e6f2abfc2d8/
+WARNING 2025-04-02 10:01:34,285 log Not Found: /app/img/undraw_posting_photo.svg
+WARNING 2025-04-02 10:13:53,001 log Not Found: /favicon.ico
+INFO 2025-04-02 11:23:35,974 autoreload D:\WORK\Python\STORE\SmartStore\order_management\orders\models.py changed, reloading.
+INFO 2025-04-02 11:23:37,870 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 11:25:00,399 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 11:25:52,290 autoreload D:\WORK\Python\STORE\SmartStore\order_management\orders\models.py changed, reloading.
+INFO 2025-04-02 11:25:52,760 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 12:26:40,410 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 13:48:51,185 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 13:48:52,116 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:32:09,227 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 16:32:14,135 log Internal Server Error: /api/cod-orders/
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1318, 'Incorrect number of arguments for PROCEDURE order_management.GetCodOrdersWithDetails; expected 7, got 8')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\STORE\smartstore\order_management\cod_orders\views.py", line 123, in list
+    cursor.execute(""" CALL GetCodOrdersWithDetails(%s, %s, %s, %s, %s, %s, %s, %s) """, [
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1318, 'Incorrect number of arguments for PROCEDURE order_management.GetCodOrdersWithDetails; expected 7, got 8')
+INFO 2025-04-02 16:36:28,730 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 16:36:29,173 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 16:36:32,686 log Internal Server Error: /api/cod-orders/
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 200, in _mogrify
+    query = query % args
+            ~~~~~~^~~~~~
+TypeError: not enough arguments for format string
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+MySQLdb.ProgrammingError: not enough arguments for format string
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\STORE\smartstore\order_management\cod_orders\views.py", line 119, in list
+    cursor.execute(""" CALL GetCodOrdersWithDetails(%s, %s, %s, %s, %s, %s, %s, %s) """, [
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 176, in execute
+    mogrified_query = self._mogrify(query, args)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 202, in _mogrify
+    raise ProgrammingError(str(m))
+django.db.utils.ProgrammingError: not enough arguments for format string
+INFO 2025-04-02 16:38:06,682 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 16:38:07,095 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 16:41:22,746 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 16:41:28,574 log Internal Server Error: /api/cod-orders/
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Unknown column 'p_order_datetime_from' in 'where clause'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\STORE\smartstore\order_management\cod_orders\views.py", line 120, in list
+    cursor.execute(""" CALL GetCodOrdersWithDetails(%s, %s, %s, %s, %s, %s, %s) """, [
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Unknown column 'p_order_datetime_from' in 'where clause'")
+INFO 2025-04-02 16:42:45,369 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 16:42:45,902 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 16:42:49,214 log Internal Server Error: /api/cod-orders/
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Unknown column 'p_order_datetime_from' in 'where clause'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\STORE\smartstore\order_management\cod_orders\views.py", line 120, in list
+    cursor.execute(""" CALL GetCodOrdersWithDetails(%s, %s, %s, %s, %s, %s, %s) """, [
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Unknown column 'p_order_datetime_from' in 'where clause'")
+WARNING 2025-04-02 16:46:25,493 log Unauthorized: /api/cod-orders/
+INFO 2025-04-02 16:55:55,340 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 16:55:55,747 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:02:44,385 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:02:44,884 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:04:36,621 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:04:37,111 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:08:02,973 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:08:03,363 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:11:41,867 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:11:42,452 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:13:46,848 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:13:47,363 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:17:45,474 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:17:46,034 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 17:23:13,317 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:23:13,711 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 17:56:43,456 log Bad Request: /api/cod-orders/
+INFO 2025-04-02 17:58:22,412 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 17:58:23,086 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 17:58:40,216 log Bad Request: /api/cod-orders/
+INFO 2025-04-02 18:06:24,869 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 18:06:25,612 autoreload Watching for file changes with StatReloader
+WARNING 2025-04-02 18:06:32,706 log Bad Request: /api/cod-orders/
+WARNING 2025-04-02 18:07:15,207 log Bad Request: /api/cod-orders/
+INFO 2025-04-02 18:36:06,724 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 18:36:07,337 autoreload Watching for file changes with StatReloader
+INFO 2025-04-02 18:36:09,083 autoreload D:\WORK\Python\STORE\SmartStore\order_management\cod_orders\views.py changed, reloading.
+INFO 2025-04-02 18:36:09,885 autoreload Watching for file changes with StatReloader
+ERROR 2025-04-02 18:36:14,057 log Internal Server Error: /api/cod-orders/
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Unknown column 'adjusted_cod_date_from' in 'where clause'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\STORE\smartstore\order_management\cod_orders\views.py", line 135, in list
+    cursor.execute(""" CALL GetCodOrdersWithDetails(%s, %s, %s, %s, %s, %s, %s) """, [
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "D:\WORK\Python\Setup\Installed\Lib\site-packages\MySQLdb\connections.py", line 280, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Unknown column 'adjusted_cod_date_from' in 'where clause'")
+WARNING 2025-04-02 18:40:09,708 log Bad Request: /api/cod-orders/
+INFO 2025-04-02 18:50:23,985 autoreload D:\WORK\Python\STORE\SmartStore\order_management\order_management\settings.py changed, reloading.

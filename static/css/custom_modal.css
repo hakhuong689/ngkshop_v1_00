@@ -1,0 +1,110 @@
+/*============START - FORM CREATE-EDIT PRODUCT */
+/* Modal container giữ modal trên cùng */
+#product-form-container {
+    z-index: 1060 !important;
+    /* display: flex; */
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal dialog giãn ra theo nội dung và chỉ cuộn khi cần */
+#product-form-container .modal-dialog {
+    width: 100%;
+    /* Đảm bảo modal chiếm toàn bộ chiều ngang nếu cần */
+    max-width: 900px;
+    /* Đặt giới hạn chiều rộng tối đa */
+    height: auto;
+    /* Tự động giãn chiều cao */
+    max-height: 90vh;
+    /* Không vượt quá 90% chiều cao màn hình */
+    overflow-y: auto;
+    /* Cuộn nội dung khi cần */
+}
+
+/* Modal content không bị hạn chế */
+#product-form-container .modal-content {
+    height: auto;
+    /* Chiều cao tự động dựa trên nội dung */
+    max-height: 90vh;
+    /* Giới hạn để không vượt quá màn hình */
+}
+
+/* Modal body tự điều chỉnh nội dung */
+#product-form-container .modal-body {
+    height: auto;
+    /* Cho phép nội dung mở rộng */
+    max-height: 80vh;
+    /* Không vượt quá màn hình */
+    overflow-y: auto;
+    /* Cuộn nếu nội dung dài */
+    padding: 15px;
+}
+
+/* Table trong tab hiển thị tốt */
+#urls-table,
+#prices-table {
+    width: 100%;
+    /* Bảng chiếm hết chiều ngang */
+    table-layout: auto;
+    /* Cho phép bảng co giãn theo nội dung */
+}
+
+.customtblhead th {
+    padding: 8px;
+    text-align: center;
+    /* Canh giữa nội dung */
+}
+
+.table-action {
+    text-align: center;
+}
+
+/* Căn chỉnh label và input trên cùng một dòng */
+.form-row {
+    display: flex;
+    /* Căn chỉnh các phần tử theo chiều ngang */
+    align-items: center;
+    /* Canh giữa theo chiều dọc */
+    margin-bottom: 15px;
+    /* Khoảng cách giữa các dòng */
+}
+
+/* Tạo khoảng cách giữa label và input */
+.form-row label {
+    margin-right: 10px;
+    /* Cách 10px từ label đến input */
+    width: 150px;
+    /* Chiều rộng cố định cho label để căn chỉnh */
+    /* text-align: right; */
+    /* Canh phải label để đẹp hơn */
+}
+
+/* Input chiếm phần còn lại */
+.form-row input {
+    flex: 1;
+    /* Input tự động giãn để chiếm không gian còn lại */
+}
+
+/* Căn chỉnh input giá tiền */
+#product-form-container .price-input {
+    text-align: right;
+}
+
+.action-btn {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+#urls-table,
+#prices-table {
+    margin-bottom: 15px;
+}
+
+input[name="url_number"],
+input[name="price_number"] {
+    width: 50px;
+    text-align: center;
+}
+
+/*============END - FORM CREATE-EDIT PRODUCT */

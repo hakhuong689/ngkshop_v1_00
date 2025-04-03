@@ -1,0 +1,133 @@
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from .models import Order, OrderLog
+from .serializers import OrderSerializer
+from django.utils import timezone
+from rest_framework.permissions import IsAuthenticated
+from urllib.parse import urlparse, parse_qs
+from django.db.models import Q
+from datetime import datetime
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()                          # Lấy tất cả đơn hàng
+    serializer_class = OrderSerializer                      # Sử dụng OrderSerializer
+    permission_classes = [IsAuthenticated]                  # Yêu cầu xác thực token
+
+    # Tìm kiếm và lọc dữ liệu theo ngày tháng
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.query_params.get('search', '')
+        start_date = self.request.query_params.get('start_date', '')
+        end_date = self.request.query_params.get('end_date', '')
+
+        # Tìm kiếm trên order_fullname, order_phone, order_address
+        if search_query:
+            queryset = queryset.filter(
+                Q(order_fullname__icontains=search_query) |
+                Q(order_phone__icontains=search_query) |
+                Q(order_address__icontains=search_query)
+            )
+
+        # Lọc theo order_datetime
+        if start_date and not end_date:                     #Chỉ nhập Start Date
+            try:
+                start_date = datetime.strptime(start_date, '%Y-%m-%d')
+                start_date_start = start_date.replace(hour=0, minute=0, second=0)
+                start_date_end = start_date.replace(hour=23, minute=59, second=59)
+                queryset = queryset.filter(order_datetime__gte=start_date_start, order_datetime__lte=start_date_end)
+                print(start_date_start, start_date_end)
+            except ValueError:
+                pass
+        elif end_date and not start_date:                    #Chỉ nhập End Date
+            try:
+                end_date = datetime.strptime(end_date, '%Y-%m-%d')
+                end_date_start = end_date.replace(hour=0, minute=0, second=0)
+                end_date_end = end_date.replace(hour=23, minute=59, second=59)
+                queryset = queryset.filter(order_datetime__gte=end_date_start, order_datetime__lte=end_date_end)
+            except ValueError:
+                pass
+        elif start_date and end_date:                        #Nhập đủ Start và End Date
+            try:
+                start_date = datetime.strptime(start_date, '%Y-%m-%d')
+                end_date = datetime.strptime(end_date, '%Y-%m-%d')
+                start_date_start = start_date.replace(hour=0, minute=0, second=0)
+                end_date_end = end_date.replace(hour=23, minute=59, second=59)
+                queryset = queryset.filter(order_datetime__gte=start_date_start, order_datetime__lte=end_date_end)
+            except ValueError:
+                pass
+        return queryset
+    
+    # Thêm mới dữ liệu về từ API
+    def create(self, request, *args, **kwargs):
+        # Xử lý dữ liệu từ hệ thống khác qua POST
+        data = request.data
+        print(data)
+        # Phân tích order_url để trích xuất UTM parameters
+        order_url = data.get('order_url', '')
+        parsed_url = urlparse(order_url)
+        if order_url:
+            query_params = parse_qs(parsed_url.query)
+            # Gán các giá trị UTM từ URL (nếu có)
+            data['ads_utm_source']      = query_params.get('utm_source', [''])[0]   or None
+            data['ads_utm_medium']      = query_params.get('utm_medium', [''])[0]   or None
+            data['ads_utm_campaign']    = query_params.get('utm_campaign', [''])[0] or None
+            data['ads_utm_content']     = query_params.get('utm_content', [''])[0]  or None
+            data['ads_adsid']           = query_params.get('utm_id', [''])[0]       or None
+        
+        # Xử lý order_note: 
+        if data.get('order_note') == 'ghi_chu':             # Nếu giá trị là "ghi_chu" thì để trống
+            data['order_note'] = ''                         # Gán thành chuỗi rỗng
+
+        # Xử lý order_fullname: 
+        if data.get('order_fullname') == 'full_name':       # Nếu giá trị là "full_name" thì để trống
+            data['order_fullname'] = ''                     # Gán thành chuỗi rỗng
+
+        # Xử lý order_address: 
+        if data.get('order_address') == 'address':          # Nếu giá trị là "address" thì để trống
+            data['order_address'] = ''                      # Gán thành chuỗi rỗng
+        
+        #data['updated_user'] = request.user.username        # Gán username thay vì id
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)           # Kiểm tra dữ liệu hợp lệ
+        self.perform_create(serializer)                     # Lưu dữ liệu vào DB
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    # Xử lý cập nhật dữ liệu qua PATCH
+    def partial_update(self, request, *args, **kwargs):
+        
+        instance = self.get_object()                                                    # Lấy đơn hàng cần cập nhật
+        old_data = OrderSerializer(instance).data                                       # Dữ liệu cũ trước khi cập nhật
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)                                       # Kiểm tra dữ liệu hợp lệ
+
+        # Ghi log cho từng trường thay đổi
+        for field, new_value in request.data.items():
+            old_value = str(old_data.get(field))
+            if old_value != str(new_value):
+                OrderLog.objects.create(
+                    order=instance,
+                    updated_user=request.user,
+                    field_changed=field,
+                    old_value=old_value,
+                    new_value=new_value,
+                    changed_at=timezone.now()
+                )
+        serializer.save(updated_user=request.user.username)                             # Update User
+        return Response(serializer.data)                                                # Trả về dữ liệu đã cập nhật
+    
+# Thêm view để render index.html
+from django.shortcuts import render, redirect
+def index(request):
+    # Kiểm tra cookie auth_token
+    if 'auth_token' in request.COOKIES:
+        return render(request, 'pages/index.html')                                      # Có cookie -> hiển thị index
+    return redirect('login')                                                            # Không có cookie -> chuyển đến login
+def login(request):
+    if 'auth_token' in request.COOKIES:
+        return redirect('index')                                                        # Đã có cookie -> chuyển đến index
+    return render(request, 'pages/login.html')                                          # Chưa có cookie -> hiển thị login
+def orders(request):
+    if 'auth_token' in request.COOKIES:
+        return render(request, 'pages/orders.html')                                     # Render orders.html
+    return redirect('login')
