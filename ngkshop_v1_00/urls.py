@@ -1,5 +1,5 @@
 """
-URL configuration for order_management project.
+URL configuration for ngkshop_v1_00 project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
