@@ -97,8 +97,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ngkshop_v1_00',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'PASSWORD': 'Vacom@123',
+        'HOST': '54.255.232.238',
         'PORT': '3306',
     }
 }
