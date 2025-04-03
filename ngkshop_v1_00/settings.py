@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': 'ngkshop_v1_00',
         'USER': 'root',
         'PASSWORD': 'Vacom@123',
-        'HOST': '54.255.232.238',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
